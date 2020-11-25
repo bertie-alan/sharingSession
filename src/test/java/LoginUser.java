@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,7 +8,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class LoginUser {
 
@@ -24,7 +25,8 @@ public class LoginUser {
 
     @Test
     public void LoginAsUser(){
-        String profile = "My Profile";
+        //Audit Trail Log menu XPath
+        String menuXpath = "(//a[@class='nav-link']/child::*)[6]";
 
         //insert username
         driver.findElement(By.xpath("//input[@placeholder='you@example.com']")).sendKeys("adli.lantai3.02@gmail.com");
@@ -35,13 +37,8 @@ public class LoginUser {
 
         //wait for elements to show
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='nav-link']/child::*")));
-        //actual: body contains My Profile
-        String actualprofile = driver.findElement(By.xpath("//a[@class='nav-link']/child::*")).getText();
-        //verify user success login; expected: body must contains My Profile
-        assertEquals(actualprofile, profile);
-
-        String bodyText = driver.findElement(By.tagName("body")).getText();
-        System.out.println(bodyText);
+        //verify user success login; expected: body must not contains Audit Trail Log menu
+        assertTrue(driver.findElements(By.xpath(menuXpath)).isEmpty());
 
     }
 

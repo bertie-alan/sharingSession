@@ -42,8 +42,6 @@ public class LoginInvalidCredentials {
         //verify invalid credentials; expected: form must contains Invalid Username or Password
         assertEquals(actualAlertMsg, alertMsg);
 
-        String bodyText = driver.findElement(By.tagName("body")).getText();
-        System.out.println(bodyText);
     }
 
     @AfterTest

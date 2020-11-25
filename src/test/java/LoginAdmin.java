@@ -41,9 +41,6 @@ public class LoginAdmin {
         //verify user success login; expected: body must contains Audit Trail Log
         assertEquals(actualMenuName, menuName);
 
-        String bodyText = driver.findElement(By.tagName("body")).getText();
-        System.out.println(bodyText);
-
     }
 
     @AfterTest
